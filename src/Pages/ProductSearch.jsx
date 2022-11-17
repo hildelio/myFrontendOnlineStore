@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import Button from '@mui/material/Button';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import ProductCard from '../Components/ProductCard';
 import { saveCartItems, getCartItems } from '../services/localStorageAPI';
@@ -151,7 +154,11 @@ class ProductSearch extends Component {
           {
             products.length !== 0
               ? products.map((product) => (
-                <div key={ product.id }>
+                <Card
+                  sx={ { maxWidth: 180 } }
+                  key={ product.id }
+                  className="card"
+                >
                   <Link
                     data-testid="product-detail-link"
                     to={ `/details-card/${product.id}` }
@@ -163,15 +170,20 @@ class ProductSearch extends Component {
                       shipping={ product.shipping }
                     />
                   </Link>
-                  <button
-                    id={ product.id }
-                    type="button"
-                    data-testid="product-add-to-cart"
-                    onClick={ this.addCartList }
-                  >
-                    Adicionar ao Carrinho
-                  </button>
-                </div>
+                  <CardActions>
+
+                    <Button
+                      id={ product.id }
+                      type="button"
+                      data-testid="product-add-to-cart"
+                      onClick={ this.addCartList }
+                    >
+                      <AddShoppingCartIcon />
+                      {' '}
+                      Adicionar ao Carrinho
+                    </Button>
+                  </CardActions>
+                </Card>
               ))
               : (
                 <div className="search-command">

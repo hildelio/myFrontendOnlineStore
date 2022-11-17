@@ -33,6 +33,10 @@
 
 .main-search {
   display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  justify-content: space-evenly;
+  width: 100%;
 }
 
 .aside-categories {
@@ -55,7 +59,8 @@
 }
 
 .categories-button:hover {
-  background-color: gray;
+  background-color: white;
+  border: b 0;
 }
 
 .categories-button:active {
@@ -90,4 +95,11 @@
   font-weight: 400;
   height: 42px;
   line-height: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 420px;
+  justify-content: space-between;
 }

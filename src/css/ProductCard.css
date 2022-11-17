@@ -1,0 +1,9 @@
+.card-first-section {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.card-second-section {
+  display: flex;
+  justify-content: space-evenly;
+}
