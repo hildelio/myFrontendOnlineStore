@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import ProductCard from '../Components/ProductCard';
 import { saveCartItems, getCartItems } from '../services/localStorageAPI';
+import logo from '../assets/logo.png';
+import '../css/ProductSearch.css';
 
 class ProductSearch extends Component {
   constructor() {
@@ -83,51 +85,58 @@ class ProductSearch extends Component {
       cartList,
     } = this.state;
     return (
-      <div>
+      <div className="product-search-container">
         {/*    <button
           type="button"
           data-testid="category"
           onClick={ () => console.log('chamou') }
         >
-          category
+        category
         </button> */}
-        <header>
-          <input
-            data-testid="query-input"
-            value={ query }
-            name={ query }
-            type="text"
-            onChange={ this.inputChange }
-          />
-          <button
-            data-testid="query-button"
-            type="button"
-            onClick={ this.requireAPI }
-          >
-            Pesquisar
-          </button>
-        </header>
-        <aside>
-          {categories.map((category) => (
+        <header className="header">
+          <section>
+            <input
+              className="input-search"
+              data-testid="query-input"
+              value={ query }
+              name={ query }
+              type="text"
+              onChange={ this.inputChange }
+              placeholder="Digite o que você busca"
+            />
             <button
-              data-testid="category"
-              id={ category.id }
-              name={ category.id }
+              data-testid="query-button"
               type="button"
-              key={ category.id }
-              onClick={ this.categoryId }
+              onClick={ this.requireAPI }
             >
-              {category.name}
+              Pesquisar
             </button>
-          ))}
-        </aside>
-
-        <main>
-          <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
-          <div data-testid="shopping-cart-size">
-            { cartList !== null
-            && cartList.reduce((prev, curr) => (+prev) + (+curr.amount), 0) }
-          </div>
+          </section>
+          <img src={ logo } alt="logo" />
+          <section className="cart-icon">
+            <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
+            <div data-testid="shopping-cart-size">
+              { cartList !== null
+          && cartList.reduce((prev, curr) => (+prev) + (+curr.amount), 0) }
+            </div>
+          </section>
+        </header>
+        <main className="main-search">
+          <aside className="aside-categories">
+            {categories.map((category) => (
+              <button
+                className="categories-button"
+                data-testid="category"
+                id={ category.id }
+                name={ category.id }
+                type="button"
+                key={ category.id }
+                onClick={ this.categoryId }
+              >
+                {category.name}
+              </button>
+            ))}
+          </aside>
           {
             products.length !== 0
               ? products.map((product) => (
@@ -154,11 +163,11 @@ class ProductSearch extends Component {
                 </div>
               ))
               : (
-                <div>
-                  <p data-testid="home-initial-message">
+                <div className="search-command">
+                  <p data-testid="home-initial-message" className="command">
                     Digite algum termo de pesquisa ou escolha uma categoria.
                   </p>
-                  <p>
+                  <p className="product-not-found">
                     Nenhum produto foi encontrado
                   </p>
                 </div>
