@@ -1,5 +1,8 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { IconButton } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import ProductCard from '../Components/ProductCard';
 import { saveCartItems, getCartItems } from '../services/localStorageAPI';
@@ -104,17 +107,25 @@ class ProductSearch extends Component {
               onChange={ this.inputChange }
               placeholder="Digite o que você busca"
             />
-            <button
+            <IconButton
               data-testid="query-button"
               type="button"
               onClick={ this.requireAPI }
+              color="secundary"
             >
+              <SearchIcon />
+              {' '}
               Pesquisar
-            </button>
+            </IconButton>
           </section>
           <img src={ logo } alt="logo" />
           <section className="cart-icon">
-            <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
+            <Link
+              to="/cart"
+              data-testid="shopping-cart-button"
+            >
+              <AddShoppingCartIcon />
+            </Link>
             <div data-testid="shopping-cart-size">
               { cartList !== null
           && cartList.reduce((prev, curr) => (+prev) + (+curr.amount), 0) }
