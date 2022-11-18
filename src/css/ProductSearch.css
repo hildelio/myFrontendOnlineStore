@@ -35,7 +35,6 @@
   display: flex;
   flex-wrap: wrap;
   height: 100%;
-  justify-content: space-evenly;
   width: 100%;
 }
 
@@ -85,6 +84,14 @@
   letter-spacing: 0.055em;
   line-height: 31px;
   text-transform: uppercase;
+}
+
+.card-section {
+  align-items: flex-start;
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  flex-wrap: wrap;
 }
 
 .product-not-found {

@@ -92,13 +92,6 @@ class ProductSearch extends Component {
     } = this.state;
     return (
       <div className="product-search-container">
-        {/*    <button
-          type="button"
-          data-testid="category"
-          onClick={ () => console.log('chamou') }
-        >
-        category
-        </button> */}
         <header className="header">
           <section>
             <input
@@ -151,51 +144,53 @@ class ProductSearch extends Component {
               </button>
             ))}
           </aside>
-          {
-            products.length !== 0
-              ? products.map((product) => (
-                <Card
-                  sx={ { maxWidth: 180 } }
-                  key={ product.id }
-                  className="card"
-                >
-                  <Link
-                    data-testid="product-detail-link"
-                    to={ `/details-card/${product.id}` }
+          <section className="card-section">
+            {
+              products.length !== 0
+                ? products.map((product) => (
+                  <Card
+                    sx={ { maxWidth: 180 } }
+                    key={ product.id }
+                    className="card"
                   >
-                    <ProductCard
-                      title={ product.title }
-                      price={ product.price }
-                      thumbnail={ product.thumbnail }
-                      shipping={ product.shipping }
-                    />
-                  </Link>
-                  <CardActions>
-
-                    <Button
-                      id={ product.id }
-                      type="button"
-                      data-testid="product-add-to-cart"
-                      onClick={ this.addCartList }
+                    <Link
+                      data-testid="product-detail-link"
+                      to={ `/details-card/${product.id}` }
                     >
-                      <AddShoppingCartIcon />
-                      {' '}
-                      Adicionar ao Carrinho
-                    </Button>
-                  </CardActions>
-                </Card>
-              ))
-              : (
-                <div className="search-command">
-                  <p data-testid="home-initial-message" className="command">
-                    Digite algum termo de pesquisa ou escolha uma categoria.
-                  </p>
-                  <p className="product-not-found">
-                    Nenhum produto foi encontrado
-                  </p>
-                </div>
-              )
-          }
+                      <ProductCard
+                        title={ product.title }
+                        price={ product.price }
+                        thumbnail={ product.thumbnail }
+                        shipping={ product.shipping }
+                      />
+                    </Link>
+                    <CardActions>
+
+                      <Button
+                        id={ product.id }
+                        type="button"
+                        data-testid="product-add-to-cart"
+                        onClick={ this.addCartList }
+                      >
+                        <AddShoppingCartIcon />
+                        {' '}
+                        Adicionar ao Carrinho
+                      </Button>
+                    </CardActions>
+                  </Card>
+                ))
+                : (
+                  <div className="search-command">
+                    <p data-testid="home-initial-message" className="command">
+                      Digite algum termo de pesquisa ou escolha uma categoria.
+                    </p>
+                    <p className="product-not-found">
+                      Nenhum produto foi encontrado
+                    </p>
+                  </div>
+                )
+            }
+          </section>
         </main>
       </div>
     );

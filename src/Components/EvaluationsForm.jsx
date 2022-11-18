@@ -1,33 +1,33 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Avaliations from './Avaliations';
+import Evaluations from './Evaluations';
 
-class AvaliationForm extends Component {
+class EvaluationsForm extends Component {
   state = {
     email: '',
     details: '',
     rating: [false, false, false, false, false],
     ratingValue: 0,
     valid: true,
-    avaliations: [],
+    evaluations: [],
   };
 
   count = Array.from({ length: 5 }, (element, index) => index);
 
   componentDidMount() {
-    this.loadAvaliations();
+    this.loadevaluations();
   }
 
-  loadAvaliations = () => {
+  loadevaluations = () => {
     // const { match: { params: { id } } } = this.props;
     // console.log(id);
 
     const { prodId } = this.props;
-    let avaliations = localStorage.getItem(prodId);
-    if (avaliations !== null) {
-      avaliations = JSON.parse(avaliations);
+    let evaluations = localStorage.getItem(prodId);
+    if (evaluations !== null) {
+      evaluations = JSON.parse(evaluations);
       this.setState({
-        avaliations,
+        evaluations,
       });
     }
   };
@@ -72,23 +72,23 @@ class AvaliationForm extends Component {
   };
 
   checkInputs = () => {
-    const { email, details, ratingValue, avaliations } = this.state;
+    const { email, details, ratingValue, evaluations } = this.state;
     const { prodId } = this.props;
     // regex de teste de email
     const re = /\S+@\S+\.\S+/;
     const result = re.test(email);
 
     if (email.length > 0 && ratingValue > 0 && result === true) {
-      avaliations.push({ email, text: details, rating: ratingValue });
+      evaluations.push({ email, text: details, rating: ratingValue });
       this.setState({
         email: '',
         details: '',
         rating: [false, false, false, false, false],
         ratingValue: 0,
         valid: true,
-        avaliations,
+        evaluations,
       });
-      localStorage.setItem(prodId, JSON.stringify(avaliations));
+      localStorage.setItem(prodId, JSON.stringify(evaluations));
     } else {
       this.setState({
         valid: false,
@@ -97,7 +97,7 @@ class AvaliationForm extends Component {
   };
 
   render() {
-    const { email, details, valid, avaliations } = this.state;
+    const { email, details, valid, evaluations } = this.state;
     return (
       <form>
         <fieldset>
@@ -138,12 +138,12 @@ class AvaliationForm extends Component {
           {!valid && (<p data-testid="error-msg">Campos inválidos</p>) }
         </fieldset>
         <fieldset>
-          { avaliations.map((avaliation, index) => (
+          { evaluations.map((evaluation, index) => (
             <fieldset key={ index }>
-              <Avaliations
-                email={ avaliation.email }
-                rating={ avaliation.rating }
-                text={ avaliation.text }
+              <Evaluations
+                email={ evaluation.email }
+                rating={ evaluation.rating }
+                text={ evaluation.text }
               />
             </fieldset>
           ))}
@@ -153,8 +153,8 @@ class AvaliationForm extends Component {
   }
 }
 
-AvaliationForm.propTypes = {
+EvaluationsForm.propTypes = {
   prodId: PropTypes.string.isRequired,
 };
 
-export default AvaliationForm;
+export default EvaluationsForm;

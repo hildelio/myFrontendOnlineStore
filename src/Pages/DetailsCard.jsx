@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { getProductById } from '../services/api';
 import ProductCard from '../Components/ProductCard';
 import { saveCartItems, getCartItems } from '../services/localStorageAPI';
-import AvaliationForm from '../Components/AvaliationForm';
+import EvaluationsForm from '../Components/EvaluationsForm';
 
 class DetailsCard extends Component {
   state = {
@@ -91,7 +91,7 @@ class DetailsCard extends Component {
           />
         )}
         <div>
-          <AvaliationForm prodId={ id } />
+          <EvaluationsForm prodId={ id } />
         </div>
       </div>
     );
