@@ -1,0 +1,31 @@
+.details-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.details-header {
+  align-items: center;
+  background: #003be5;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  height: 148px;
+  justify-content: space-between;
+  padding-left: 2%;
+  padding-right: 2%;
+  width: 96%;
+}
+
+.details-content {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.details-cart-button {
+  display: flex;
+}
+
+.details-card {
+  display: flex;
+}

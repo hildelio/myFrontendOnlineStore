@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import ReplyIcon from '@mui/icons-material/Reply';
+import { IconButton } from '@mui/material';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import Button from '@mui/material/Button';
 import { getProductById } from '../services/api';
 import ProductCard from '../Components/ProductCard';
 import { saveCartItems, getCartItems } from '../services/localStorageAPI';
 import EvaluationsForm from '../Components/EvaluationsForm';
+import '../css/DetailsCard.css';
+import logo from '../assets/logo.png';
 
 class DetailsCard extends Component {
   state = {
@@ -62,38 +70,65 @@ class DetailsCard extends Component {
       },
     } = this.props;
     return (
-      <div>
-        <button
-          type="button"
-          onClick={ () => history.push('/cart') }
-          data-testid="shopping-cart-button"
-        >
-          Carrinho de Compras
-        </button>
-        <div data-testid="shopping-cart-size">
-          { cartList !== null
+      <main className="details-container">
+        <header className="details-header">
+          <IconButton
+            type="button"
+            onClick={ () => history.push('/') }
+          >
+            <ReplyIcon />
+            {' '}
+            Voltar
+          </IconButton>
+          <img src={ logo } alt="logo" />
+          <div className="details-cart-button">
+            <IconButton
+              type="button"
+              onClick={ () => history.push('/cart') }
+              data-testid="shopping-cart-button"
+            >
+              Carrinho de compras
+              {' '}
+              <AddShoppingCartIcon />
+            </IconButton>
+            <div data-testid="shopping-cart-size">
+              { cartList !== null
           && cartList.reduce((prev, curr) => (+prev) + (+curr.amount), 0) }
-        </div>
-        <button
-          id={ product.id }
-          type="button"
-          data-testid="product-detail-add-to-cart"
-          onClick={ this.addCartList }
-        >
-          Adicionar ao Carrinho
-        </button>
-        {product && (
-          <ProductCard
-            title={ product.title }
-            price={ product.price }
-            thumbnail={ product.thumbnail }
-            shipping={ product.shipping }
-          />
-        )}
-        <div>
-          <EvaluationsForm prodId={ id } />
-        </div>
-      </div>
+            </div>
+          </div>
+        </header>
+        <section className="details-content">
+          <div className="details-card">
+            {product && (
+              <Card
+                sx={ { maxWidth: 180 } }
+                key={ product.id }
+                className="card"
+              >
+                <ProductCard
+                  title={ product.title }
+                  price={ product.price }
+                  thumbnail={ product.thumbnail }
+                  shipping={ product.shipping }
+                />
+                <IconButton
+                  id={ product.id }
+                  type="button"
+                  data-testid="product-detail-add-to-cart"
+                  onClick={ this.addCartList }
+                >
+                  <AddShoppingCartIcon />
+                  {' '}
+                  Adicionar ao Carrinho
+                </IconButton>
+              </Card>
+            )}
+          </div>
+          <div>
+            <EvaluationsForm prodId={ id } />
+          </div>
+        </section>
+      </main>
     );
   }
 }
